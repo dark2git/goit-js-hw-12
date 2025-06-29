@@ -2,14 +2,14 @@ import axios from 'axios';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-import { fetchImages } from '../js/pixabay-api.js';
+import { fetchImages } from './js/pixabay-api.js';
 import {
   renderGallery,
   showLoader,
   hideLoader,
   showLoadMoreButton,
   hideLoadMoreButton,
-} from '../js/render-functions.js';
+} from './js/render-functions.js';
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
