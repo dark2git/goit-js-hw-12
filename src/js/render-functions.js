@@ -79,3 +79,11 @@ export function showLoadMoreButton() {
 export function hideLoadMoreButton() {
   buttonMore.classList.add('hiddenbtn');
 }
+
+export function enableLoadMoreButton() {
+  buttonMore.disabled = false;
+}
+
+export function disableLoadMoreButton() {
+  buttonMore.disabled = true;
+}

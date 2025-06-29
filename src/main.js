@@ -9,11 +9,14 @@ import {
   hideLoader,
   showLoadMoreButton,
   hideLoadMoreButton,
+  clearGallery,
+  enableLoadMoreButton,
+  disableLoadMoreButton
 } from './js/render-functions.js';
 
 const form = document.querySelector('.form');
-const gallery = document.querySelector('.gallery');
 const buttonMore = document.querySelector('.button-more');
+
 let currentQuery = '';
 let currentPage = 1;
 const perPage = 15;
@@ -36,7 +39,7 @@ async function handleSubmit(event) {
     return;
   }
 
-  gallery.innerHTML = '';
+  clearGallery();
   hideLoadMoreButton();
   showLoader();
 
@@ -57,7 +60,7 @@ async function handleSubmit(event) {
 
       if (currentPage < totalPages) {
         showLoadMoreButton();
-        buttonMore.disabled = false;
+        enableLoadMoreButton();
       } else {
         hideLoadMoreButton();
       }
@@ -78,7 +81,7 @@ async function handleSubmit(event) {
 async function handleLoadMore() {
   currentPage += 1;
   showLoader();
-  buttonMore.disabled = true;
+  disableLoadMoreButton();
 
   try {
     const data = await fetchImages(currentQuery, currentPage);
@@ -88,7 +91,7 @@ async function handleLoadMore() {
 
     const totalPages = Math.ceil(totalHits / perPage);
     if (currentPage < totalPages) {
-      buttonMore.disabled = false;
+      enableLoadMoreButton();
       showLoadMoreButton();
     } else {
       hideLoadMoreButton();
@@ -113,7 +116,7 @@ async function handleLoadMore() {
       message: 'Помилка при завантаженні додаткових зображень',
       position: 'topRight',
     });
-    buttonMore.disabled = false;
+    enableLoadMoreButton();
   } finally {
     hideLoader();
   }
